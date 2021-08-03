@@ -1,0 +1,29 @@
+local Buttons = script.Parent.Parent.Buttons:GetChildren()wait()
+local Windows = script.Parent:GetChildren()wait()
+
+--[[Buttons.ChildAdded:Connect(function (child)
+	if child:IsA("TextButton") then
+		child.MouseButton1Down:Connect(GUI_Open_Close())
+	end
+end)
+]]
+
+for _, button in pairs(Buttons) do
+	if button:IsA("TextButton") then
+		button.MouseButton1Down:Connect(function()
+			for I, Window in pairs(Windows) do
+				if Window:IsA("Frame") then
+					if Window.Name == button:GetAttribute("Window_To_Open") then
+						if Window.Visible == false then
+							Window.Visible = true
+						else
+							Window.Visible = false
+						end
+					else
+					Window.Visible = false
+					end
+				end
+			end
+		end)
+	end
+end
